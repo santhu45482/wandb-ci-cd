@@ -1,4 +1,4 @@
-name: GitHub Actions Demo
+name: variables
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 
 on: [push]
@@ -16,4 +16,9 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
+        run: echo"This job'a status is ${{job.status}}.
+      - name: see payload # this step is for debugging purpose only. so you can see the payload
+        run: echo "PAYLOAD:\n${PAYLOAD}\n"
+        env:
+          PAYLOAD: ${{ toJSON(github.event) }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
